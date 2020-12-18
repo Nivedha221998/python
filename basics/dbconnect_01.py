@@ -1,5 +1,6 @@
 import datetime; 
 import mysql.connector;
+import json;
 from environment import host;
 
 
@@ -10,6 +11,9 @@ def timestamp():
 def timediff(a,b):
     return(b-a)
 
+def converter(d):
+    return d.__str__()
+
 def connection():
 
     a = timestamp()
@@ -18,13 +22,14 @@ def connection():
                               host = host,
                               port=3306,
                               database='placement')
-    mycursor = cnx.cursor()
-    mycursor.execute("SELECT * FROM placements")
+    mycursor = cnx.cursor(dictionary=True)
+    mycursor.execute("SELECT * FROM company")
 
     myresult = mycursor.fetchall()
     cnx.close()
-    for x in myresult:
-        print(x)
+    
+    json_object = json.dumps(myresult,indent = 4 , sort_keys = True,default=converter)
+    print(json_object)
 
     b = timestamp()
     print(b)

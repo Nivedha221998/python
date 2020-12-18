@@ -1,7 +1,5 @@
-def f(a, L=None):
-    if L is None:
-        L = []
-        print("none")
-    L.append(a)
-    return L
-print(f(1))
+from collections import deque
+d = deque('ghi') 
+d.append('j')                    
+d.appendleft('f')
+print(index(d[, start[, stop]]))
